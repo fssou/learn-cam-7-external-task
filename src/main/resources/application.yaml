@@ -1,0 +1,25 @@
+env: "$ENV:dev"
+
+app:
+  name: "$APP_NAME:cam-external-task"
+
+server:
+  host: "::"
+  port: 8080
+  ssl:
+    host: "::"
+    port: 8443
+    keyStore:
+      path: keystore.jks
+      password: lactobacilos
+      alias: francl.in
+      privateKeyPassword: lactobacilos
+
+camunda:
+  url: "$CAM_API_REST:http://localhost:58080/engine-rest"
+
+auth:
+  url: "$AUTH_API_URL:http://localhost:18080"
+  clientId: "$AUTH_CLIENT_ID:cam-external-task"
+  clientSecret: "$AUTH_CLIENT_SECRET:cam-external-task"
+  grantType: "$AUTH_GRANT_TYPE:client_credentials"
