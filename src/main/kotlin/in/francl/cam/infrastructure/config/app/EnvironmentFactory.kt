@@ -1,8 +1,6 @@
 package `in`.francl.cam.infrastructure.config.app
 
-import `in`.francl.cam.infrastructure.config.module.AdapterInboundModule
-import `in`.francl.cam.infrastructure.config.module.AdapterOutboundModule
-import `in`.francl.cam.infrastructure.config.module.PluginModule
+import `in`.francl.cam.infrastructure.config.module.*
 import io.ktor.server.engine.*
 import org.slf4j.LoggerFactory
 
@@ -26,9 +24,12 @@ internal class EnvironmentFactory(
                 port = config.property("server.port").getString().toInt()
             }
 
-            module(PluginModule()::init)
-            module(AdapterOutboundModule()::init)
-            module(AdapterInboundModule()::init)
+            module(Koin)
+            module(PluginKtorServer)
+            module(Metrics)
+            module(DIAuthorization)
+            module(DICamunda)
+            module(DIController)
         }
     }
     enum class Type {

@@ -1,6 +1,6 @@
 package `in`.francl.cam.unit
 
-import `in`.francl.cam.infrastructure.infrastructure
+import `in`.francl.cam.infrastructure.config.module.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -22,7 +22,12 @@ class ApplicationTest {
             }
         }
         application {
-            infrastructure()
+            Koin(this)
+            PluginKtorServer(this)
+            Metrics(this)
+            DIAuthorization(this)
+            DICamunda(this)
+            DIController(this)
         }
         client.get("/monitoring/health").let { response ->
             assert(response.status.isSuccess())
