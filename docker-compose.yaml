@@ -1,0 +1,14 @@
+
+services:
+  externaltask:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      APP_ID: 00000000-0000-0000-0000-000000000000
+      APP_NAME: cam-external-task
+      CAM_API_REST: http://localhost:58080/engine-rest
+      AUTH_API_URL: http://localhost:18080
+      AUTH_CLIENT_ID: 00000000-0000-0000-0000-000000000000
+      AUTH_CLIENT_SECRET: 00000000-0000-0000-0000-000000000000
+      AUTH_GRANT_TYPE: client_credentials

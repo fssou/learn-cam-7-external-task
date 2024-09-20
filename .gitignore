@@ -39,3 +39,4 @@ out/
 ### Keystore files ###
 *.jks
 *.p12
+*.pem

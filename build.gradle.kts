@@ -2,19 +2,8 @@
 group = "in.francl"
 version = "0.0.1"
 
-application {
-    mainClass.set("in.francl.cam.ApplicationKt")
-    val isDevelopment: Boolean = project.ext.has("development")
-    applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
-}
-
-repositories {
-    mavenCentral()
-}
-
 plugins {
     kotlin("jvm") version "2.+"
-    kotlin("kapt") version "2.+"
     kotlin("plugin.serialization") version "2.+"
     id("io.ktor.plugin") version "2.+"
     id("org.jetbrains.dokka") version "1.+"
@@ -30,6 +19,9 @@ dependencies {
 
     implementation("io.ktor:ktor-server-core")
     implementation("io.ktor:ktor-server-netty")
+    implementation("io.ktor:ktor-server-jetty")
+    implementation("io.ktor:ktor-server-tomcat")
+    implementation("io.ktor:ktor-server-cio")
     implementation("io.ktor:ktor-server-compression")
     implementation("io.ktor:ktor-server-content-negotiation")
     implementation("io.ktor:ktor-server-call-logging")
@@ -78,19 +70,34 @@ dependencies {
     implementation("ch.qos.logback:logback-classic")
     implementation("ch.qos.logback:logback-core")
 
-    implementation("net.logstash.logback:logstash-logback-encoder:7.+")
+    implementation("net.logstash.logback:logstash-logback-encoder:8.+")
 
-    implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.+")
-    implementation("com.sun.xml.bind:jaxb-impl:3.+")
+    implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.+")
+    implementation("com.sun.xml.bind:jaxb-impl:4.+")
 
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit5"))
+    testImplementation(platform("org.junit:junit-bom:5.+"))
+    testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine")
+    testImplementation("org.junit.jupiter:junit-jupiter-params")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.+")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("io.ktor:ktor-server-tests")
     testImplementation("io.ktor:ktor-server-test-host")
     testImplementation("io.insert-koin:koin-test")
     testImplementation("io.insert-koin:koin-test-junit5")
+}
+
+application {
+    mainClass.set("in.francl.cam.ExternalTaskApplication")
+    val isDevelopment: Boolean = project.ext.has("development")
+    applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
+}
+
+repositories {
+    mavenCentral()
 }
 
 tasks.jacocoTestReport {
