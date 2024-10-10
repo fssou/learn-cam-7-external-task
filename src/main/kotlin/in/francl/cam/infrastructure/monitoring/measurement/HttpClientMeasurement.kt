@@ -1,4 +1,4 @@
-package `in`.francl.cam.infrastructure.monitoring.instrumentation
+package `in`.francl.cam.infrastructure.monitoring.measurement
 
 import io.micrometer.core.instrument.MeterRegistry
 import io.micrometer.core.instrument.Tag

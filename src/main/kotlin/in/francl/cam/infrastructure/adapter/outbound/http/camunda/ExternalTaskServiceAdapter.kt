@@ -1,10 +1,10 @@
-package `in`.francl.cam.infrastructure.adapter.outbound.camunda
+package `in`.francl.cam.infrastructure.adapter.outbound.http.camunda
 
 import com.fasterxml.jackson.databind.JavaType
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import `in`.francl.cam.domain.model.Task
 import `in`.francl.cam.domain.port.outbound.task.TaskManager
-import `in`.francl.cam.infrastructure.monitoring.instrumentation.Measurable
+import `in`.francl.cam.infrastructure.monitoring.measurement.Measurable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.slf4j.MDCContext
 import kotlinx.coroutines.withContext

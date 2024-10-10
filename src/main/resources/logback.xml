@@ -5,12 +5,15 @@
             <providers>
                 <timestamp>
                     <fieldName>timestamp</fieldName>
-                    <pattern>yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ</pattern>
+                    <pattern>yyyy-MM-dd'T'HH:mm:ss.SSSZ</pattern>
                     <timeZone>America/Sao_Paulo</timeZone>
                 </timestamp>
                 <logLevel>
                     <fieldName>level</fieldName>
                 </logLevel>
+                <message>
+                    <fieldName>message</fieldName>
+                </message>
                 <threadName>
                     <fieldName>thread</fieldName>
                 </threadName>
@@ -20,9 +23,6 @@
                 <contextName>
                     <fieldName>appname</fieldName>
                 </contextName>
-                <message>
-                    <fieldName>message</fieldName>
-                </message>
                 <mdc />
                 <logstashMarkers />
                 <arguments />
@@ -38,11 +38,15 @@
                 <stackTrace>
                     <fieldName>stackTrace</fieldName>
                     <throwableConverter class="net.logstash.logback.stacktrace.ShortenedThrowableConverter">
-                        <maxDepthPerThrowable>200</maxDepthPerThrowable>
-                        <maxLength>5000</maxLength>
+                        <maxDepthPerThrowable>32</maxDepthPerThrowable>
+                        <maxLength>2048</maxLength>
                         <rootCauseFirst>true</rootCauseFirst>
                     </throwableConverter>
                 </stackTrace>
+                <version>
+                    <fieldName>version</fieldName>
+                    <version>${VERSION}</version>
+                </version>
             </providers>
         </encoder>
     </appender>

@@ -24,12 +24,13 @@ internal class EnvironmentFactory(
                 port = config.property("server.port").getString().toInt()
             }
 
-            module(Koin)
-            module(PluginKtorServer)
-            module(Metrics)
+            module(DIKoin)
+            module(DIMetrics)
             module(DIAuthorization)
+            module(DITaskHandler)
             module(DICamunda)
             module(DIController)
+            module(PluginKtorServer)
         }
     }
     enum class Type {

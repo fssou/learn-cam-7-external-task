@@ -3,10 +3,10 @@ package `in`.francl.cam.infrastructure.config.module
 import `in`.francl.cam.domain.port.outbound.authorization.AuthorizationGateway
 import `in`.francl.cam.domain.port.outbound.authorization.OAuth2Credentials
 import `in`.francl.cam.domain.port.outbound.authorization.TokenExpirable
-import `in`.francl.cam.infrastructure.adapter.outbound.authorization.SecurityTokenServiceAdapter
+import `in`.francl.cam.infrastructure.adapter.outbound.http.authorization.SecurityTokenServiceAdapter
 import `in`.francl.cam.infrastructure.cache.SimpleCache
 import `in`.francl.cam.infrastructure.client.http.HttpClientFactory
-import `in`.francl.cam.infrastructure.monitoring.instrumentation.HttpClientMeasurement
+import `in`.francl.cam.infrastructure.monitoring.measurement.HttpClientMeasurement
 import io.ktor.server.application.*
 import io.micrometer.core.instrument.MeterRegistry
 import org.koin.dsl.module

@@ -1,6 +1,6 @@
 package `in`.francl.cam.infrastructure.client.http.plugin
 
-import `in`.francl.cam.infrastructure.monitoring.instrumentation.Measurable
+import `in`.francl.cam.infrastructure.monitoring.measurement.Measurable
 import io.ktor.client.*
 import io.ktor.client.plugins.*
 import io.ktor.client.request.*

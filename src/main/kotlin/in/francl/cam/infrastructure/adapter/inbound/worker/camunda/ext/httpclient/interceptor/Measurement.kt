@@ -1,6 +1,6 @@
 package `in`.francl.cam.infrastructure.adapter.inbound.worker.camunda.ext.httpclient.interceptor
 
-import `in`.francl.cam.infrastructure.monitoring.instrumentation.Measurable
+import `in`.francl.cam.infrastructure.monitoring.measurement.Measurable
 import org.apache.hc.client5.http.classic.ExecChain
 import org.apache.hc.client5.http.classic.ExecChainHandler
 import org.apache.hc.core5.http.ClassicHttpRequest

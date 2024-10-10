@@ -18,6 +18,7 @@ private constructor(
     private fun install(scope: HttpClient) {
         scope.requestPipeline.intercept(HttpRequestPipeline.Before) {
             val correlationId = MDC.get("correlationId") ?: "unknown"
+            logger.debug("CorrelationId: $correlationId")
             context.headers.append("x-correlationId", correlationId)
             proceed()
         }

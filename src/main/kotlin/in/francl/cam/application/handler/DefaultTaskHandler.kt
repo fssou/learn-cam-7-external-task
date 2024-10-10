@@ -10,30 +10,45 @@ import org.slf4j.LoggerFactory
 
 class DefaultTaskHandler(
     private val performable: Performable,
-    private val block: DefaultHandlerConfig.() -> Unit,
-) : TaskHandler, Configurable<DefaultHandlerConfig> {
-    override val config = DefaultHandlerConfig().apply(block)
+) : TaskHandler {
 
     override suspend fun execute(task: Task, service: TaskManager) {
         runCatching {
             logger.info("Task performing")
-            performable.perform(task, service)
-                .onRight {
+            performable
+                .perform(task, service)
+                .onRight { taskResult ->
                     logger.info(
-                        Markers.append("taskResult", it),
+                        Markers.append("taskResult", taskResult),
                         "Task performed successfully",
                     )
                     service.success(
                         task,
                         mapOf(),
-                        hashMapOf("output" to it.variables)
+                        hashMapOf("output" to taskResult.variables)
                     )
-                        .onFailure {
+                        .onFailure { throwable ->
                             logger.error(
                                 Markers.append("severity", 0),
                                 "Error on handling success",
-                                it
+                                throwable
                             )
+                            service.failure(
+                                task,
+                                "[INTERNAL] ${throwable.message}",
+                                throwable.stackTraceToString(),
+                                0,
+                                0,
+                                mapOf(),
+                                hashMapOf(),
+                            )
+                                .onFailure { throwable ->
+                                    logger.error(
+                                        Markers.append("severity", 0),
+                                        "Error on handling failure",
+                                        throwable
+                                    )
+                                }
                         }
                 }
                 .onLeft { error ->
@@ -70,34 +85,35 @@ class DefaultTaskHandler(
                         else -> {
                             Result.failure(Exception("Unknown error type", error.cause))
                         }
-                    }.onFailure {
-                        logger.error(
-                            Markers.append("severity", 0),
-                            "Exception on handling error or failure",
-                            it
-                        )
-                        service.failure(
-                            task,
-                            "[${error.code}] ${error.message}",
-                            error.details,
-                            0,
-                            0,
-                            mapOf(),
-                            hashMapOf(),
-                        )
                     }
+                        .onFailure { throwable ->
+                            logger.error(
+                                Markers.append("severity", 0),
+                                "Exception on handling error or failure",
+                                throwable
+                            )
+                            service.failure(
+                                task,
+                                "[${error.code}] ${error.message}",
+                                error.details,
+                                0,
+                                0,
+                                mapOf(),
+                                hashMapOf(),
+                            )
+                        }
                 }
         }
-            .onFailure {
+            .onFailure { throwable ->
                 logger.error(
                     Markers.append("severity", 0),
                     "Error performing task",
-                    it
+                    throwable
                 )
                 service.failure(
                     task,
-                    "[INTERNAL] ${it.message}",
-                    it.stackTraceToString(),
+                    "[INTERNAL] ${throwable.message}",
+                    throwable.stackTraceToString(),
                     0,
                     0,
                     mapOf(),

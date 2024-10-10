@@ -1,4 +1,4 @@
-package `in`.francl.cam.infrastructure.adapter.outbound.authorization
+package `in`.francl.cam.infrastructure.adapter.outbound.http.authorization
 
 import `in`.francl.cam.domain.port.outbound.authorization.Tokenable
 import kotlinx.serialization.SerialName

@@ -26,13 +26,17 @@ private constructor(
             val request = context.request
             val response = context.response
 
-            val requestBody = runCatching {
+            val requestBodyByteArray = runCatching {
                 when (val content = request.content) {
                     is OutgoingContent.ByteArrayContent -> content.bytes()
                     is OutgoingContent.ReadChannelContent -> content.readFrom().toByteArray()
                     else -> null
                 }
             }.getOrNull()
+            val requestBody = runCatching {
+                mapper.readValue(requestBodyByteArray, HashMap::class.java)
+            }.getOrElse { requestBodyByteArray?.decodeToString() }
+
             val responseBodyByteArray = runCatching {
                 when (val content = it.response) {
                     is ByteReadChannel -> content.readRemaining().readBytes()

@@ -1,10 +1,10 @@
-package `in`.francl.cam.infrastructure.adapter.inbound.worker.camunda
+package `in`.francl.cam.infrastructure.adapter.inbound.worker.camunda.handler
 
 import `in`.francl.cam.domain.model.Task
 import `in`.francl.cam.domain.port.inbound.task.TaskHandler
 import `in`.francl.cam.domain.port.outbound.task.TaskManager
 import `in`.francl.cam.infrastructure.adapter.inbound.worker.camunda.dto.CamundaExternalTask
-import `in`.francl.cam.infrastructure.monitoring.instrumentation.Measurable
+import `in`.francl.cam.infrastructure.monitoring.measurement.Measurable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

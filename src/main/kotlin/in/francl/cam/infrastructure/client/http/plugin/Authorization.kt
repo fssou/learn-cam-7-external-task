@@ -16,12 +16,9 @@ private constructor(
     private val logger = config.logger
     private val gateway = config.gateway
 
-    private val scopesKey = AttributeKey<Set<String>>("scopes")
-
-
     private fun install(scope: HttpClient) {
         scope.requestPipeline.intercept(HttpRequestPipeline.State) {
-            val scopes = context.attributes[scopesKey]
+            val scopes = context.attributes[ATTRIBUTE_KEY_SCOPES]
             val tokenResult = gateway.retrieve(scopes)
             context.headers {
                 tokenResult.onSuccess { token ->
@@ -37,13 +34,12 @@ private constructor(
     }
 
     companion object Plugin : HttpClientPlugin<Configuration, Authorization> {
+        val ATTRIBUTE_KEY_SCOPES = AttributeKey<Set<String>>("scopes")
         override val key: AttributeKey<Authorization> = AttributeKey(Authorization::class.qualifiedName!!)
-
         override fun prepare(block: Configuration.() -> Unit): Authorization {
             val config = Configuration().apply(block)
             return Authorization(config)
         }
-
         override fun install(plugin: Authorization, scope: HttpClient) {
             plugin.install(scope)
         }

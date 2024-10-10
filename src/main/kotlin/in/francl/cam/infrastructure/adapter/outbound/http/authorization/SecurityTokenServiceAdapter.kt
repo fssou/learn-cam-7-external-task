@@ -1,4 +1,4 @@
-package `in`.francl.cam.infrastructure.adapter.outbound.authorization
+package `in`.francl.cam.infrastructure.adapter.outbound.http.authorization
 
 import `in`.francl.cam.domain.port.outbound.authorization.AuthorizationGateway
 import `in`.francl.cam.domain.port.outbound.authorization.OAuth2Credentials

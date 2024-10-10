@@ -22,12 +22,13 @@ class ApplicationTest {
             }
         }
         application {
-            Koin(this)
-            PluginKtorServer(this)
-            Metrics(this)
+            DIKoin(this)
+            DIMetrics(this)
             DIAuthorization(this)
+            DITaskHandler(this)
             DICamunda(this)
             DIController(this)
+            PluginKtorServer(this)
         }
         client.get("/monitoring/health").let { response ->
             assert(response.status.isSuccess())

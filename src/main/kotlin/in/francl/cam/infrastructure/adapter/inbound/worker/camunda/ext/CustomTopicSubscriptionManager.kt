@@ -70,9 +70,6 @@ class CustomTopicSubscriptionManager(
             if (!isBackoffStrategyDisabled.get()) {
                 runBackoffStrategySuspend(fetchAndLockResponse)
             }
-        } else {
-            logger.warn("No topics to fetch and lock. Stopping acquisition loop.")
-            stop()
         }
     }
 
@@ -80,9 +77,7 @@ class CustomTopicSubscriptionManager(
         val externalTasks: List<ExternalTask>?
         return try {
             logger.debug("Fetch and lock new external tasks for ${subscriptions.size} topics")
-            externalTasks = withContext(Dispatchers.IO){
-                engineClient.fetchAndLock(subscriptions)
-            }
+            externalTasks = engineClient.fetchAndLock(subscriptions)
             FetchAndLockResponseDto(externalTasks)
         } catch (ex: EngineClientException) {
             logger.error("Exception while fetching and locking task", ex)

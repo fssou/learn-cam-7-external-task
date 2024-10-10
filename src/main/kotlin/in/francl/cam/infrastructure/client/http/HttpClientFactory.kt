@@ -5,7 +5,7 @@ import `in`.francl.cam.infrastructure.client.http.plugin.Authorization
 import `in`.francl.cam.infrastructure.client.http.plugin.CorrelationId
 import `in`.francl.cam.infrastructure.client.http.plugin.Logging
 import `in`.francl.cam.infrastructure.client.http.plugin.Measurement
-import `in`.francl.cam.infrastructure.monitoring.instrumentation.Measurable
+import `in`.francl.cam.infrastructure.monitoring.measurement.Measurable
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.*
