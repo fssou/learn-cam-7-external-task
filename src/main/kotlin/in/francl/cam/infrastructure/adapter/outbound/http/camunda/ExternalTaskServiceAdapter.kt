@@ -3,7 +3,7 @@ package `in`.francl.cam.infrastructure.adapter.outbound.http.camunda
 import com.fasterxml.jackson.databind.JavaType
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import `in`.francl.cam.domain.model.Task
-import `in`.francl.cam.domain.port.outbound.task.TaskManager
+import `in`.francl.cam.application.port.outbound.task.TaskManager
 import `in`.francl.cam.infrastructure.monitoring.measurement.Measurable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.slf4j.MDCContext
@@ -21,7 +21,7 @@ import kotlin.time.toDuration
 class ExternalTaskServiceAdapter(
     private val externalService: ExternalTaskService,
     private val taskExecutionMeasurement: Measurable,
-) : TaskManager {
+) : `in`.francl.cam.application.port.outbound.task.TaskManager {
 
     override suspend fun success(task: Task, variables: Map<String, Any?>, localVariables: Map<String, Any?>) : Result<Unit> {
         return withContext(Dispatchers.IO.plus(MDCContext())) {

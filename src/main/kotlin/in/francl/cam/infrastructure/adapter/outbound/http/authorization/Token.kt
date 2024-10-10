@@ -1,6 +1,6 @@
 package `in`.francl.cam.infrastructure.adapter.outbound.http.authorization
 
-import `in`.francl.cam.domain.port.outbound.authorization.Tokenable
+import `in`.francl.cam.application.port.outbound.authorization.Tokenable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -16,4 +16,4 @@ data class Token(
     override val refreshToken: String,
     @Serializable(ScopeSerializer::class)
     override val scope: Set<String>,
-) : Tokenable
+) : `in`.francl.cam.application.port.outbound.authorization.Tokenable

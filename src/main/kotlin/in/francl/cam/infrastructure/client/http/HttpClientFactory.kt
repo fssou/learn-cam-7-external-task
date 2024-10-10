@@ -1,6 +1,6 @@
 package `in`.francl.cam.infrastructure.client.http
 
-import `in`.francl.cam.domain.port.outbound.authorization.AuthorizationGateway
+import `in`.francl.cam.application.port.outbound.authorization.AuthorizationGateway
 import `in`.francl.cam.infrastructure.client.http.plugin.Authorization
 import `in`.francl.cam.infrastructure.client.http.plugin.CorrelationId
 import `in`.francl.cam.infrastructure.client.http.plugin.Logging
@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory
 class HttpClientFactory(
     private val measurable: Measurable,
     private val type: Type = Type.DEFAULT,
-    private val authorizationGateway: AuthorizationGateway? = null,
+    private val authorizationGateway: `in`.francl.cam.application.port.outbound.authorization.AuthorizationGateway? = null,
 ) {
 
     fun create(): HttpClient {

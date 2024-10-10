@@ -1,10 +1,10 @@
 package `in`.francl.cam.infrastructure.adapter.outbound.http.authorization
 
-import `in`.francl.cam.domain.port.outbound.authorization.AuthorizationGateway
-import `in`.francl.cam.domain.port.outbound.authorization.OAuth2Credentials
-import `in`.francl.cam.domain.port.outbound.authorization.TokenExpirable
-import `in`.francl.cam.domain.port.outbound.authorization.Tokenable
-import `in`.francl.cam.domain.port.outbound.cache.Cacheable
+import `in`.francl.cam.application.port.outbound.authorization.AuthorizationGateway
+import `in`.francl.cam.application.port.outbound.authorization.OAuth2Credentials
+import `in`.francl.cam.application.port.outbound.authorization.TokenExpirable
+import `in`.francl.cam.application.port.outbound.authorization.Tokenable
+import `in`.francl.cam.application.port.outbound.cache.Cacheable
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
@@ -17,13 +17,13 @@ import org.slf4j.LoggerFactory
 class SecurityTokenServiceAdapter(
     private val httpClient: HttpClient,
     private val url: String,
-    private val oAuth2Credentials: OAuth2Credentials,
-    private val cache: Cacheable<Set<String>, TokenExpirable>,
-) : AuthorizationGateway {
+    private val oAuth2Credentials: `in`.francl.cam.application.port.outbound.authorization.OAuth2Credentials,
+    private val cache: `in`.francl.cam.application.port.outbound.cache.Cacheable<Set<String>, `in`.francl.cam.application.port.outbound.authorization.TokenExpirable>,
+) : `in`.francl.cam.application.port.outbound.authorization.AuthorizationGateway {
 
     override suspend fun retrieve(
         scopes: Set<String>,
-    ): Result<Tokenable> {
+    ): Result<`in`.francl.cam.application.port.outbound.authorization.Tokenable> {
         val cachedToken = cache.get(scopes)
         if (cachedToken != null) {
             logger.info(

@@ -1,6 +1,6 @@
 package `in`.francl.cam.infrastructure.client.http.plugin
 
-import `in`.francl.cam.domain.port.outbound.authorization.AuthorizationGateway
+import `in`.francl.cam.application.port.outbound.authorization.AuthorizationGateway
 import io.ktor.client.*
 import io.ktor.client.plugins.*
 import io.ktor.client.request.*
@@ -30,7 +30,7 @@ private constructor(
 
     class Configuration {
         var logger = LoggerFactory.getLogger(Authorization::class.java)!!
-        lateinit var gateway: AuthorizationGateway
+        lateinit var gateway: `in`.francl.cam.application.port.outbound.authorization.AuthorizationGateway
     }
 
     companion object Plugin : HttpClientPlugin<Configuration, Authorization> {

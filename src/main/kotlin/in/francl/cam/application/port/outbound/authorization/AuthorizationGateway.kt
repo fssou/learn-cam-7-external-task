@@ -1,4 +1,4 @@
-package `in`.francl.cam.domain.port.outbound.authorization
+package `in`.francl.cam.application.port.outbound.authorization
 
 /**
  * Foco: A interface se concentra na comunicação com um sistema externo (provavelmente um serviço de autorização) para obter tokens.
@@ -6,5 +6,5 @@ package `in`.francl.cam.domain.port.outbound.authorization
  * @author Franclin Sousa
  */
 interface AuthorizationGateway {
-    suspend fun retrieve(scopes: Set<String>,): Result<Tokenable>
+    suspend fun retrieve(scopes: Set<String>,): Result<`in`.francl.cam.application.port.outbound.authorization.Tokenable>
 }

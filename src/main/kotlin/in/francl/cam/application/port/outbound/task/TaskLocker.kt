@@ -1,4 +1,4 @@
-package `in`.francl.cam.domain.port.outbound.task
+package `in`.francl.cam.application.port.outbound.task
 
 import `in`.francl.cam.domain.model.Task
 

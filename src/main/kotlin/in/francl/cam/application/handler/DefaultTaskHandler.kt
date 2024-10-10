@@ -3,16 +3,16 @@ package `in`.francl.cam.application.handler
 import `in`.francl.cam.application.error.BusinessServiceError
 import `in`.francl.cam.application.error.FailureServiceError
 import `in`.francl.cam.domain.model.Task
-import `in`.francl.cam.domain.port.inbound.task.TaskHandler
-import `in`.francl.cam.domain.port.outbound.task.TaskManager
+import `in`.francl.cam.application.port.inbound.task.TaskHandler
+import `in`.francl.cam.application.port.outbound.task.TaskManager
 import net.logstash.logback.marker.Markers
 import org.slf4j.LoggerFactory
 
 class DefaultTaskHandler(
     private val performable: Performable,
-) : TaskHandler {
+) : `in`.francl.cam.application.port.inbound.task.TaskHandler {
 
-    override suspend fun execute(task: Task, service: TaskManager) {
+    override suspend fun execute(task: Task, service: `in`.francl.cam.application.port.outbound.task.TaskManager) {
         runCatching {
             logger.info("Task performing")
             performable

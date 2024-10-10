@@ -1,8 +1,8 @@
 package `in`.francl.cam.infrastructure.adapter.inbound.worker.camunda.handler
 
 import `in`.francl.cam.domain.model.Task
-import `in`.francl.cam.domain.port.inbound.task.TaskHandler
-import `in`.francl.cam.domain.port.outbound.task.TaskManager
+import `in`.francl.cam.application.port.inbound.task.TaskHandler
+import `in`.francl.cam.application.port.outbound.task.TaskManager
 import `in`.francl.cam.infrastructure.adapter.inbound.worker.camunda.dto.CamundaExternalTask
 import `in`.francl.cam.infrastructure.monitoring.measurement.Measurable
 import kotlinx.coroutines.CoroutineScope
@@ -20,8 +20,8 @@ import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
 class DefaultExternalTaskHandler(
-    private val handler: TaskHandler,
-    private val taskManagerDelegate: (ExternalTaskService) -> TaskManager,
+    private val handler: `in`.francl.cam.application.port.inbound.task.TaskHandler,
+    private val taskManagerDelegate: (ExternalTaskService) -> `in`.francl.cam.application.port.outbound.task.TaskManager,
     private val taskAcquireMeasurement: Measurable,
 ) : ExternalTaskHandler {
     override fun execute(externalTask: ExternalTask, externalTaskService: ExternalTaskService) {

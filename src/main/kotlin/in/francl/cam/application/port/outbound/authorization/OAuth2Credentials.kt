@@ -1,4 +1,4 @@
-package `in`.francl.cam.domain.port.outbound.authorization
+package `in`.francl.cam.application.port.outbound.authorization
 
 data class OAuth2Credentials(
     val clientId: String,

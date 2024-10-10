@@ -1,7 +1,7 @@
 package `in`.francl.cam.infrastructure.config.module
 
 import `in`.francl.cam.application.handler.TaskHandlerRegistry
-import `in`.francl.cam.domain.port.outbound.task.TaskManager
+import `in`.francl.cam.application.port.outbound.task.TaskManager
 import `in`.francl.cam.infrastructure.adapter.inbound.worker.camunda.factory.ExternalTaskClientFactory
 import `in`.francl.cam.infrastructure.adapter.inbound.worker.camunda.handler.DefaultExternalTaskHandler
 import `in`.francl.cam.infrastructure.adapter.outbound.http.camunda.ExternalTaskServiceAdapter
@@ -41,7 +41,7 @@ object DICamunda : (Application) -> Unit {
 
             logger.info("Camunda clients created with ${clients.size} instances for ${taskHandlerRegistry.handlers.size} task handlers")
 
-            val taskManagerDelegate: (ExternalTaskService) -> TaskManager = {
+            val taskManagerDelegate: (ExternalTaskService) -> `in`.francl.cam.application.port.outbound.task.TaskManager = {
                 ExternalTaskServiceAdapter(it, taskExecutionMeasurement)
             }
 

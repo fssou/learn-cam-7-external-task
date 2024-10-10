@@ -8,7 +8,7 @@ data class TokenExpire(
     override val expiresIn: Int,
     override val refreshToken: String,
     override val scope: Set<String>,
-) : `in`.francl.cam.domain.port.outbound.authorization.TokenExpirable {
+) : `in`.francl.cam.application.port.outbound.authorization.TokenExpirable {
     private val expiredAt: Instant = Instant.now().plusSeconds(expiresIn.toLong())
     override fun isExpired(): Boolean = Instant.now().isAfter(expiredAt.minusSeconds(10))
 
